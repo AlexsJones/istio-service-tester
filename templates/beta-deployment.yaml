@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beta
+  labels:
+    app: beta
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: beta
+  template:
+    metadata:
+      labels:
+        app: beta
+    spec:
+      containers:
+        - name: beta
+          image: {{.Values.image.repository}}
+          imagePullPolicy: Always
+          command: ["/bin/sh"]
+          args: ["-c", "/bin/ist -s 0.0.0.0:9001 -t alpha:9000"]
+          resources:
+            requests:
+              memory: "0.5Gi"
+            limits:
+              memory: "1Gi"
+          ports:
+            - containerPort: 9001
+              name: grpc
+              protocol: TCP

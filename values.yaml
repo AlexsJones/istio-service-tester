@@ -1,0 +1,13 @@
+# Default values for istio-service-tester.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2
+# Namespace for the test services
+namespace: test
+image:
+  repository: tibbar/istio-service-tester:latest
+  pullPolicy: IfNotPresent
+
+# Edit if you use a different gateway for testing than default
+gateway: istio-ingressgateway.istio-system.svc.cluster.local

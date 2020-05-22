@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: alpha
+spec:
+  hosts:
+    - alpha
+  gateways:
+    - {{ .Values.gateway }}
+  tcp:
+    - route:
+        - destination:
+            host: alpha
+            port:
+              number: 9000
