@@ -1,7 +1,11 @@
 # istio-service-tester
 
 Use this to test if your mesh is working.
+
 This creates a pair of basic GRPC services in a namespace you've already enabled.
+
+The services will syn/ack each other forever.
+It's proven useful for sanity checks...
 
 
 ![](images/1.png)
