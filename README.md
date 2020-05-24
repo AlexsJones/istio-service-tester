@@ -1,4 +1,6 @@
 # istio-service-tester
+<a href="https://codeclimate.com/github/AlexsJones/istio-service-tester/maintainability"><img src="https://api.codeclimate.com/v1/badges/adb73edd2d90e647857a/maintainability" /></a>
+
 
 Use this to test if your mesh is working.
 
