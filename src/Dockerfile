@@ -14,5 +14,6 @@ COPY . .
 # And compile the project
 RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build && go install
 FROM alpine as runner
+COPY --from=server_builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=server_builder /go/bin/istio-service-tester /bin/ist
 ENTRYPOINT ["/bin/ist"]

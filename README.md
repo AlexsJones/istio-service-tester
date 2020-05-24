@@ -2,21 +2,22 @@
 
 Use this to test if your mesh is working.
 
-This creates a pair of basic GRPC services in a namespace you've already enabled.
+This creates a pair of basic GRPC services in a namespace you have already enabled.
+It also creates a single service that will default to trying to hit an external endpoint.
 
-The services will syn/ack each other forever.
-It's proven useful for sanity checks...
+It has proven useful for sanity checks...
 
 
-![](images/1.png)
+![](images/2.png)
 
 
 ```
+kubectl label ns/default istio-injection=enabled
 helm install test-istio .
 ```
 
 
-Or customise to fit your usecase
+Or customise to fit your usecase...
 
 ```
 helm install test-istio . \

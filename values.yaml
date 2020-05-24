@@ -11,3 +11,6 @@ image:
 
 # Edit if you use a different gateway for testing than default
 gateway: istio-ingressgateway.istio-system.svc.cluster.local
+
+# The remote test url for external connectivity
+remoteUrl: https://www.google.com

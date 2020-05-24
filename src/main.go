@@ -5,6 +5,8 @@ import (
 	proto "github.com/AlexsJones/istio-service-tester/protocolbuffers"
 	"github.com/golang/glog"
 	"github.com/jessevdk/go-flags"
+	"net/http"
+	"net/http/httputil"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -82,9 +84,41 @@ func clientPulse() {
 		count++
 	}
 }
+func remotePulse(url string) error {
+
+	count := 0
+
+	request, err := http.NewRequest("GET",url,nil)
+	client  := &http.Client{}
+	if err != nil {
+		return err
+	}
+	for {
+		log.Debug("Performing request")
+		resp, err := client.Do(request)
+		if err != nil {
+			return err
+		}
+
+		respB, err := httputil.DumpResponse(resp,false)
+		if err != nil {
+			return err
+		}
+
+		log.Info(string(respB))
+		log.Infof("Responded with status %d", resp.StatusCode)
+
+		count++
+		time.Sleep(time.Second * 5)
+
+	}
+
+	return nil
+}
 var Options struct {
-	TargetAddress string `short:"t" long:"targetAddress e.g. localhost:12701" required:"true"`
-	ServerPort string `short:"s" long:"serverPort e.g.0.0.0.0:9000" required:"true"`
+	TargetAddress string `short:"t" long:"targetAddress" `
+	ServerPort string `short:"s" long:"serverPort" `
+	RemoteUrl string `short:"r" long:"remoteUrl"`
 }
 func main() {
 	// Set up a connection to the server.
@@ -92,6 +126,14 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	 go clientPulse()
-	serverStart(Options.ServerPort)
+
+	if Options.RemoteUrl != "" {
+		log.Printf("Running remote pulse")
+		if err := remotePulse(Options.RemoteUrl); err != nil {
+			log.Fatal(err)
+		}
+	}else {
+		go clientPulse()
+		serverStart(Options.ServerPort)
+	}
 }
