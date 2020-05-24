@@ -2,14 +2,17 @@
 
 Use this to test if your mesh is working.
 
-This creates a pair of basic GRPC services in a namespace you have already enabled.
-It also creates a single service that will default to trying to hit an external endpoint.
+- All code included
+- Uses HTTP/2
+- Creates a pair of basic GRPC services in a namespace you have already enabled.
+- Creates a single service that will default to trying to hit an external endpoint.
 
 It has proven useful for sanity checks...
 
 
 ![](images/2.png)
 
+![](images/3.png)
 
 ```
 kubectl label ns/default istio-injection=enabled
