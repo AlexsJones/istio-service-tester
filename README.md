@@ -6,19 +6,17 @@ Use this to test if your mesh is working.
 
 - All code included
 - Uses HTTP/2
-- Creates a pair of basic GRPC services in a namespace you have already enabled.
-- Creates a single service that will default to trying to hit an external endpoint.
+- Creates four basic GRPC services that talk to each other.
 
 It has proven useful for sanity checks...
 
 
-![](images/2.png)
+![](images/tour.gif)
 
 ![](images/3.png)
 
 ```
-kubectl label ns/default istio-injection=enabled
-helm install test-istio .
+./install_services.sh
 ```
 
 

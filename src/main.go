@@ -119,6 +119,7 @@ var Options struct {
 	TargetAddress string `short:"t" long:"targetAddress" `
 	ServerPort string `short:"s" long:"serverPort" `
 	RemoteUrl string `short:"r" long:"remoteUrl"`
+	
 }
 func main() {
 	// Set up a connection to the server.
